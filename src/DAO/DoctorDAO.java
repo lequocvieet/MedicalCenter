@@ -124,10 +124,15 @@ public class DoctorDAO {
 	 St.setString(6, newDoctor.getEmail());
 	 St.setString(7, newDoctor.getPhoneNum());
 	  
+	St.executeUpdate();
 	
 	  }
 	  finally {
 		  St.close();
 	  }
+	  
   }
+  
+  // Converting one Doctor in table -> object Doctor
+  private Doctor 
 }
