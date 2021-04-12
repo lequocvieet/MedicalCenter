@@ -1,4 +1,4 @@
-package DAO;
+/*package DAO;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -135,4 +135,4 @@ public class DoctorDAO {
   
   // Converting one Doctor in table -> object Doctor
   private Doctor 
-}
+}*/
