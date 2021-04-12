@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.print.Doc;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import core.Doctor;
 import core.Person;
@@ -104,7 +107,8 @@ public class DoctorDAO {
 	}
   }
   
-  //Add a Doctor 
+
+//Add a Doctor 
   public void addDoctor(Doctor newDoctor) throws Exception{
 	  PreparedStatement St = null;
 	  try {
@@ -134,5 +138,17 @@ public class DoctorDAO {
   }
   
   // Converting one Doctor in table -> object Doctor
-  private Doctor 
+  private Doctor convertRowToDoctor(ResultSet rs) throws SQLException {
+	  String doctorId = myRs.getString("doctorId");
+		String lastName = myRs.getString("lastName");
+		String firstName = myRs.getString("firstName");
+		String dateOfBirth = myRs.getString("dateOfBirth");
+		String email = myRs.getString("email");
+		String address = myRs.getString("address"); 
+		String phoneNum = myRs.getString("phoneNumber");
+		Date tempdate = formatter.parse(dateOfBirth);
+	    Doctor tempDoctor = new Doctor(doctorID, lastName, firstName, tempdate, address, email, phoneNum);
+		
+	return tempDoctor;
+}
 }
