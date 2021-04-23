@@ -22,13 +22,14 @@
 DROP TABLE IF EXISTS `clinic`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `clinic` (
-  `clinicID` varchar(50) DEFAULT NULL,
-  `clinicName` varchar(50) DEFAULT NULL,
-  `address` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `phoneNum` varchar(50) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL
+CREATE TABLE `clinic`
+(
+    `clinicID`   varchar(50) DEFAULT NULL,
+    `clinicName` varchar(50) DEFAULT NULL,
+    `address`    varchar(50) DEFAULT NULL,
+    `email`      varchar(50) DEFAULT NULL,
+    `phoneNum`   varchar(50) DEFAULT NULL,
+    `type`       varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -36,10 +37,12 @@ CREATE TABLE `clinic` (
 -- Dumping data for table `clinic`
 --
 
-LOCK TABLES `clinic` WRITE;
+LOCK
+TABLES `clinic` WRITE;
 /*!40000 ALTER TABLE `clinic` DISABLE KEYS */;
 /*!40000 ALTER TABLE `clinic` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 
 --
 -- Table structure for table `doctor`
@@ -48,15 +51,16 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `doctor` (
-  `doctorId` varchar(10) COLLATE utf8_bin NOT NULL,
-  `lastName` varchar(45) COLLATE utf8_bin NOT NULL,
-  `firstName` varchar(45) COLLATE utf8_bin NOT NULL,
-  `dateOfBirth` varchar(45) COLLATE utf8_bin NOT NULL,
-  `address` varchar(45) COLLATE utf8_bin NOT NULL,
-  `email` varchar(45) COLLATE utf8_bin NOT NULL,
-  `phoneNumber` varchar(45) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`doctorId`)
+CREATE TABLE `doctor`
+(
+    `doctorId`    varchar(10) COLLATE utf8_bin NOT NULL,
+    `lastName`    varchar(45) COLLATE utf8_bin NOT NULL,
+    `firstName`   varchar(45) COLLATE utf8_bin NOT NULL,
+    `dateOfBirth` varchar(45) COLLATE utf8_bin NOT NULL,
+    `address`     varchar(45) COLLATE utf8_bin NOT NULL,
+    `email`       varchar(45) COLLATE utf8_bin NOT NULL,
+    `phoneNumber` varchar(45) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`doctorId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,10 +68,12 @@ CREATE TABLE `doctor` (
 -- Dumping data for table `doctor`
 --
 
-LOCK TABLES `doctor` WRITE;
+LOCK
+TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 
 --
 -- Table structure for table `event`
@@ -76,12 +82,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `event`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `event` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `date` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `description` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `event`
+(
+    `id`          int NOT NULL AUTO_INCREMENT,
+    `name`        varchar(45) COLLATE utf8_bin DEFAULT NULL,
+    `date`        varchar(45) COLLATE utf8_bin DEFAULT NULL,
+    `description` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,10 +96,12 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-LOCK TABLES `event` WRITE;
+LOCK
+TABLES `event` WRITE;
 /*!40000 ALTER TABLE `event` DISABLE KEYS */;
 /*!40000 ALTER TABLE `event` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 
 --
 -- Table structure for table `patient`
@@ -101,17 +110,18 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `patient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `patient` (
-  `patientId` varchar(10) COLLATE utf8_bin NOT NULL,
-  `lastName` varchar(45) COLLATE utf8_bin NOT NULL,
-  `firstName` varchar(45) COLLATE utf8_bin NOT NULL,
-  `dateOfBirth` varchar(45) COLLATE utf8_bin NOT NULL,
-  `gender` varchar(45) COLLATE utf8_bin NOT NULL,
-  `doctorName` varchar(45) COLLATE utf8_bin NOT NULL,
-  `address` varchar(45) COLLATE utf8_bin NOT NULL,
-  `phoneNumber` varchar(45) COLLATE utf8_bin NOT NULL,
-  `email` varchar(45) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`patientId`)
+CREATE TABLE `patient`
+(
+    `patientId`   varchar(10) COLLATE utf8_bin NOT NULL,
+    `lastName`    varchar(45) COLLATE utf8_bin NOT NULL,
+    `firstName`   varchar(45) COLLATE utf8_bin NOT NULL,
+    `dateOfBirth` varchar(45) COLLATE utf8_bin NOT NULL,
+    `gender`      varchar(45) COLLATE utf8_bin NOT NULL,
+    `doctorName`  varchar(45) COLLATE utf8_bin NOT NULL,
+    `address`     varchar(45) COLLATE utf8_bin NOT NULL,
+    `phoneNumber` varchar(45) COLLATE utf8_bin NOT NULL,
+    `email`       varchar(45) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`patientId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,10 +129,12 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-LOCK TABLES `patient` WRITE;
+LOCK
+TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 
 --
 -- Table structure for table `weightheight`
@@ -131,13 +143,14 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `weightheight`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `weightheight` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `weight` int NOT NULL,
-  `height` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `date` varchar(45) COLLATE utf8_bin NOT NULL,
-  `personID` varchar(45) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `weightheight`
+(
+    `id`       int                          NOT NULL AUTO_INCREMENT,
+    `weight`   int                          NOT NULL,
+    `height`   varchar(45) COLLATE utf8_bin DEFAULT NULL,
+    `date`     varchar(45) COLLATE utf8_bin NOT NULL,
+    `personID` varchar(45) COLLATE utf8_bin NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,10 +158,12 @@ CREATE TABLE `weightheight` (
 -- Dumping data for table `weightheight`
 --
 
-LOCK TABLES `weightheight` WRITE;
+LOCK
+TABLES `weightheight` WRITE;
 /*!40000 ALTER TABLE `weightheight` DISABLE KEYS */;
 /*!40000 ALTER TABLE `weightheight` ENABLE KEYS */;
-UNLOCK TABLES;
+UNLOCK
+TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
