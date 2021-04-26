@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import DAO.ClinicDAO;
 import DAO.DoctorDAO;
 import DAO.EventDAO;
 import DAO.PatientDAO;
@@ -42,11 +43,11 @@ public class WelcomeScreen  {
 	private JFrame MainScreen;
 	private JTextField patientNameField;
 	private PatientDAO patientDAO;
-	//private DoctorDAO doctorDAO;
+	private DoctorDAO doctorDAO;
 	private EventDAO eventDAO;
 
 	private WeightHeightDAO whDAO;
-	//private ClinicDAO clinicDAO;
+	private ClinicDAO clinicDAO;
 	private JTable kidTable;
 	private JTable doctorTable;
 	private JTextField doctorNameField;
@@ -72,10 +73,10 @@ public class WelcomeScreen  {
 	
 	public WelcomeScreen() throws Exception {
 		patientDAO = new PatientDAO();
-		//doctorDAO = new DoctorDAO();
+		doctorDAO = new DoctorDAO();
 		whDAO = new WeightHeightDAO();
 		eventDAO = new EventDAO();
-		//clinicDAO = new ClinicDAO();
+		clinicDAO = new ClinicDAO();
 		initialize();
 	}
 	
