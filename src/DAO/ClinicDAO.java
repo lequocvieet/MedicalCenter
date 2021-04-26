@@ -19,7 +19,7 @@ public class ClinicDAO {
     // connect SQL
     public ClinicDAO() throws Exception {
         Properties prop = new Properties();
-        prop.load(new FileInputStream("database/preson.properties"));
+        prop.load(new FileInputStream("database/person.properties"));
         String user = prop.getProperty("user");
         String password = prop.getProperty("password");
         String url = prop.getProperty("url");
