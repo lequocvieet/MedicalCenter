@@ -201,8 +201,4 @@ public class DoctorDAO {
     private void close(Statement St, ResultSet Rs) throws SQLException {
         close(null, St, Rs);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 86af7be090fa28e3a7a7e78806e5c16dac59466d

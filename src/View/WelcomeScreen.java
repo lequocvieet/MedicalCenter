@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -29,11 +30,14 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.CardLayout;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+
 import java.awt.Window.Type;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import java.awt.Panel;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JToolBar;
@@ -45,27 +49,30 @@ import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
+import core.*;
+
 public class WelcomeScreen  {
 
 	private JPanel contentPane;
 	private JFrame MainScreen;
-	private JTextField patientNameField;
 	private PatientDAO patientDAO;
 	private DoctorDAO doctorDAO;
 	private EventDAO eventDAO;
 
 	private WeightHeightDAO whDAO;
 	private ClinicDAO clinicDAO;
-	private JTable kidTable;
+	private JTable patientTable;
 	private JTable doctorTable;
 	private JTextField doctorNameField;
 	private JButton btnNewButton_15;
 	private JTable eventTable;
 	private JTextField clinicNameField;
 	private JTable clinicTable;
-	private JTextField textField;
+	private JTextField patientNameField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTable table;
+	private JTable table_1;
 
 	
 	public static void main(String[] args) {                            // run chuong trinh o day
@@ -84,10 +91,10 @@ public class WelcomeScreen  {
 	
 	public WelcomeScreen() throws Exception {
 		patientDAO = new PatientDAO();
-		doctorDAO = new DoctorDAO();
+		/*doctorDAO = new DoctorDAO();
 		whDAO = new WeightHeightDAO();
 		eventDAO = new EventDAO();
-		clinicDAO = new ClinicDAO();
+		clinicDAO = new ClinicDAO();*/
 		initialize();
 	}
 	
@@ -136,11 +143,16 @@ public class WelcomeScreen  {
 		toolBar_1.setBackground(SystemColor.activeCaption);
 		toolBar_1.setFont(new Font("Segoe UI", Font.BOLD, 15));
 		toolBar_1.setOrientation(SwingConstants.VERTICAL);
+		
+		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 1181, GroupLayout.PREFERRED_SIZE)
-				.addComponent(toolBar_1, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(toolBar_1, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 1025, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -148,9 +160,16 @@ public class WelcomeScreen  {
 					.addGap(1)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(toolBar_1, GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(toolBar_1, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 547, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
+		
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
+		
+		
 		
 		JButton btnNewButton_5 = new JButton("Appointment\r\n");
 		btnNewButton_5.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -190,16 +209,45 @@ public class WelcomeScreen  {
 		toolBar.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Search");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					String name = patientNameField.getText();
+				
+					List <Patient> patients = null;
+					
+					if(name != null && name.trim().length() > 0 ) {
+						patients = patientDAO.getPatientByName(name);
+					}
+					else {
+						patients = patientDAO.getAllPatient();
+					}
+					
+                    PatientTableModel model = new PatientTableModel(patients);
+                    table_1.setModel(model);
+                    
+	
+				}
+				catch(Exception exc) {
+					JOptionPane.showMessageDialog(panel_1, "Error: "+ exc, "Error",JOptionPane.ERROR_MESSAGE);
+					
+				}
+			}
+		});
+		
+		
+		
 		btnNewButton_3.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		btnNewButton_3.setBackground(SystemColor.info);
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 15));
 		toolBar.add(btnNewButton_3);
 		
-		textField = new JTextField();
-		textField.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		textField.setFont(new Font("Tahoma", Font.BOLD, 15));
-		toolBar.add(textField);
-		textField.setColumns(10);
+		patientNameField = new JTextField();
+		patientNameField.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		patientNameField.setFont(new Font("Tahoma", Font.BOLD, 15));
+		toolBar.add(patientNameField);
+		patientNameField.setColumns(10);
 		panel_1.setLayout(gl_panel_1);
 		
 		JPanel panel_2 = new JPanel();
