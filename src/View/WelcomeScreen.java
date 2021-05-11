@@ -407,8 +407,38 @@ public class WelcomeScreen  {
 		tabbedPane.setForegroundAt(4, Color.BLACK);
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_5.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("ChatBot", null, panel_5, null);
+		
+		JToolBar toolBar_5 = new JToolBar();
+		toolBar_5.setBackground(SystemColor.activeCaption);
+		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
+		gl_panel_5.setHorizontalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_5.createSequentialGroup()
+					.addComponent(toolBar_5, GroupLayout.PREFERRED_SIZE, 952, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(198, Short.MAX_VALUE))
+		);
+		gl_panel_5.setVerticalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_5.createSequentialGroup()
+					.addComponent(toolBar_5, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(557, Short.MAX_VALUE))
+		);
+		
+		JButton btnNewButton_19 = new JButton("OpenChatBot");
+		btnNewButton_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ChatBotTab();
+			}
+		});
+		btnNewButton_19.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton_19.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		btnNewButton_19.setBackground(SystemColor.info);
+		btnNewButton_19.setForeground(SystemColor.desktop);
+		toolBar_5.add(btnNewButton_19);
+		panel_5.setLayout(gl_panel_5);
 		tabbedPane.setForegroundAt(5, Color.BLACK);
 		
 		JPanel panel_6 = new JPanel();
