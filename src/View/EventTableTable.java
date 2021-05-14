@@ -3,7 +3,9 @@ package View;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
+
 import core.Event;
 
 class EventTableTable extends AbstractTableModel {
