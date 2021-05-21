@@ -119,7 +119,6 @@ public class AddUpdateDialog extends JDialog {
 
 		idField = new JTextField();
 		idField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		idField.setEditable(false);
 		idField.setColumns(10);
 		idField.setBounds(130, 30, 320, 30);
 		contentPanel.add(idField);

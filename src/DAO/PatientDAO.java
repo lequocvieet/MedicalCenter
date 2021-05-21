@@ -151,9 +151,9 @@ public class PatientDAO {
     public void updatePatient(Patient temp) throws SQLException {
         PreparedStatement St = null;
         try {
-            String sql = "update patient "
-                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , address= ?, phoneNum=?, email=?,"
-                    + " where patientID = ? ";
+            String sql = "Update patient "
+                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , address= ?, phoneNumber=?, email=?,"
+                    + " where patientId = ? ";
             St = Con.prepareStatement(sql);
 
             String stringDate = formatter.format(temp.getDateOfBirth());
@@ -179,7 +179,7 @@ public class PatientDAO {
     public void deletePatient(String patientID) throws SQLException {
         PreparedStatement St = null;
         try {
-            String sql = "delete from patient where patientID = ?";
+            String sql = "delete from patient where patientId = ?";
             St = Con.prepareStatement(sql);
             St.setString(1, patientID);
             St.executeUpdate();
