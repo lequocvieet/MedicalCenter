@@ -37,6 +37,7 @@ import java.awt.Font;
 import javax.swing.JTabbedPane;
 import java.awt.Panel;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -63,14 +64,13 @@ public class WelcomeScreen  {
 	private WeightHeightDAO whDAO;
 	private ClinicDAO clinicDAO;
 	private JButton btnNewButton_15;
-	private JTable clinicTable;
 	private JTextField patientNameField;
 	private JTextField doctorNameField;
 	private JTextField clinicNameField;
-	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
+	private JTable table_4;
 
 	
 	public static void main(String[] args) {                            // run chuong trinh o day
@@ -90,8 +90,8 @@ public class WelcomeScreen  {
 	public WelcomeScreen() throws Exception {
 		patientDAO = new PatientDAO();
 		doctorDAO = new DoctorDAO();
-		/*whDAO = new WeightHeightDAO();
-		eventDAO = new EventDAO();*/
+		/*whDAO = new WeightHeightDAO();*/
+		eventDAO = new EventDAO();
 		clinicDAO = new ClinicDAO();
 		initialize();
 	}
@@ -591,21 +591,39 @@ public class WelcomeScreen  {
 		
 		JToolBar toolBar_6 = new JToolBar();
 		toolBar_6.setBackground(SystemColor.activeCaption);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addComponent(toolBar_6, GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 1136, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addComponent(toolBar_6, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(555, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane_3, GroupLayout.PREFERRED_SIZE, 541, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
-		JButton btnNewButton_20 = new JButton("News Event");
+		table_4 = new JTable();
+		scrollPane_3.setViewportView(table_4);
+		
+		JButton btnNewButton_20 = new JButton("News Event");   //Create New Event
 		btnNewButton_20.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddEventDialog adddialog;
+				try {
+					adddialog = new AddEventDialog();
+					adddialog.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_20.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -617,15 +635,36 @@ public class WelcomeScreen  {
 		btnNewButton_21.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnNewButton_21.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton_21.setBackground(SystemColor.info);
-		btnNewButton_21.addActionListener(new ActionListener() {
+		btnNewButton_21.addActionListener(new ActionListener() {       // Delete Event
 			public void actionPerformed(ActionEvent e) {
+				try {
+					int row = table_4.getSelectedRow();
+					if(row <0) {
+						JOptionPane.showMessageDialog(panel_4,"Please select an event","Warning",JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
+					Event temp = (Event) table_4.getValueAt(row, EventTableModel.OBJECT_COL);
+					eventDAO.deleteEvent(temp.getName());
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(panel_4,"Deleted","Deleted",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		toolBar_6.add(btnNewButton_21);
 		
-		JButton btnNewButton_22 = new JButton("Shows Event");
+		JButton btnNewButton_22 = new JButton("Shows Event");   // Shows Event
 		btnNewButton_22.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
+					List<Event> events = eventDAO.getAllEvent();			
+                    EventTableModel eventmodel = new EventTableModel(events);
+                    table_4.setModel(eventmodel);
+				}
+				catch(Exception exc) {
+					JOptionPane.showMessageDialog(panel_4, "Error: "+ exc, "Error",JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnNewButton_22.setBackground(SystemColor.info);
@@ -634,6 +673,14 @@ public class WelcomeScreen  {
 		toolBar_6.add(btnNewButton_22);
 		
 		JButton btnNewButton_23 = new JButton("Statistic");
+		btnNewButton_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DrawChart drawer;
+				drawer = new DrawChart();
+				drawer.drawingStatistics();
+				
+			}
+		});
 		btnNewButton_23.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnNewButton_23.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton_23.setBackground(SystemColor.info);
@@ -666,7 +713,7 @@ public class WelcomeScreen  {
 					.addContainerGap(557, Short.MAX_VALUE))
 		);
 		
-		JButton btnNewButton_19 = new JButton("OpenChatBot");
+		JButton btnNewButton_19 = new JButton("OpenChatBot");// Open chatBot
 		btnNewButton_19.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new ChatBotTab();

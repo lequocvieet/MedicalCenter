@@ -157,6 +157,18 @@ CREATE TABLE `weightheight`
 --
 -- Dumping data for table `weightheight`
 --
+CREATE TABLE `medicalhistory` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `dateOfInjection` varchar(20) NOT NULL,
+  `typeOfVaccine` varchar(100) NOT NULL,
+  `IDVaccine` int NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `interaction` varchar(200) NOT NULL,
+  `imageHist` mediumblob,
+  `nextAppointment` varchar(20) DEFAULT NULL,
+  `personID` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1032 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK
 TABLES `weightheight` WRITE;

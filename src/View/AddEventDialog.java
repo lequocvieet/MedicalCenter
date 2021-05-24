@@ -51,8 +51,10 @@ public class AddEventDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws Exception 
 	 */
-	public AddEventDialog() {
+	public AddEventDialog() throws Exception {
+		eventDAO=new EventDAO();
 		setType(Type.UTILITY);
 		setTitle("Create New Event");
 		setBounds(100, 100, 500, 320);
