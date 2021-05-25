@@ -181,7 +181,25 @@ public class WelcomeScreen  {
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 15));
 		toolBar_1.add(btnNewButton_4);
 		
-		JButton btnNewButton_6 = new JButton("Index           ");
+		JButton btnNewButton_6 = new JButton("Index           ");// Index
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row=table_1.getSelectedRow();
+				if(row<0) {
+					JOptionPane.showMessageDialog(panel_1, e);
+				}
+				Patient patient=(Patient) table_1.getValueAt(row, PatientTableModel.OBJECT_COL);
+				String idPerson=patient.getID();
+				IndexTab indexTab;
+				try {
+					indexTab=new IndexTab(idPerson);
+					indexTab.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_6.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton_6.setBackground(SystemColor.info);
