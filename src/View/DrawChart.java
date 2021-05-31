@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -15,15 +14,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -55,40 +53,65 @@ public class DrawChart {
 	}
 
 	public void drawingHeightChart() {
-		try{
-           	final String SQL = "SELECT id, height FROM weightheight where personID = " + this.personId;
-	        final CategoryDataset dataset = new JDBCCategoryDataset(myConnection, SQL);
-	     
-	        JFreeChart chart = ChartFactory.createLineChart("Height Chart","Time","Height", dataset, PlotOrientation.VERTICAL, false, false, false);
-	        CategoryPlot catplot = chart.getCategoryPlot();
-	        catplot.setRangeGridlinePaint(Color.BLACK);
-	        
-	        ChartFrame frame = new ChartFrame("Chart of Height", chart);
-	        frame.setVisible(true);
-	        frame.setSize(450, 450);
-	      }
-	    catch(Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    }
+		try {
+			final String SQL = "SELECT id, height FROM weightheight where personID = " + this.personId;
+			final CategoryDataset dataset = new JDBCCategoryDataset(myConnection, SQL);
+
+			JFreeChart chart = ChartFactory.createLineChart("Height Chart", "Time", "Height", dataset,
+					PlotOrientation.VERTICAL, false, false, false);
+			CategoryPlot catplot = chart.getCategoryPlot();
+			catplot.setRangeGridlinePaint(Color.BLACK);
+			JButton saveHeight=new JButton("Save");
+			saveHeight.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					saveChartImage(chart, saveHeight);
+				}
+			});
+
+			ChartFrame frame = new ChartFrame("Chart of Height", chart);
+			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+			frame.setVisible(true);
+			frame.setSize(450, 450);
+			frame.add(saveHeight);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
 
 	}
 
 	public void drawingWeightChart() {
-		try{
-           	final String SQL = "SELECT id, weight FROM weightheight where personID = " + this.personId;
-	        final CategoryDataset dataset = new JDBCCategoryDataset(myConnection, SQL);
-	     
-	        JFreeChart chart = ChartFactory.createLineChart("Weight Chart","Time","Weight", dataset, PlotOrientation.VERTICAL, false, false, false);
-	        CategoryPlot catplot = chart.getCategoryPlot();
-	        catplot.setRangeGridlinePaint(Color.BLACK);
-	        
-	        ChartFrame frame = new ChartFrame("Chart of Weight", chart);
-	        frame.setVisible(true);
-	        frame.setSize(450, 450);
-	      }
-	    catch(Exception e){
-	        JOptionPane.showMessageDialog(null, e);
-	    }
+
+		try {
+			final String SQL = "SELECT id, weight FROM weightheight where personID = " + this.personId;
+			final CategoryDataset dataset = new JDBCCategoryDataset(myConnection, SQL);
+
+			JFreeChart chart = ChartFactory.createLineChart("Weight Chart", "Time", "Weight", dataset,
+					PlotOrientation.VERTICAL, false, false, false);
+			CategoryPlot catplot = chart.getCategoryPlot();
+			catplot.setRangeGridlinePaint(Color.BLACK);
+			JButton saveWeight =new JButton("Save");
+			saveWeight.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					saveChartImage(chart, saveWeight);
+					
+					
+				}
+			});
+
+			ChartFrame frame = new ChartFrame("Chart of Weight", chart);
+			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+			frame.setVisible(true);
+			frame.setSize(450, 450);
+			frame.add(saveWeight);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+
 	}
 
 	public void drawingStatistics() {
@@ -108,45 +131,43 @@ public class DrawChart {
 					dataset, // data
 					true, // include legend
 					true, false);
-			JButton saveImage = new JButton();
-
-			saveImage.setText("Save Image");
-			saveImage.addActionListener(new ActionListener() {
+			JButton saveStatistic = new JButton("Save");
+			saveStatistic.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
-					JFileChooser fileChooser = new JFileChooser();
-					fileChooser.setFileFilter(new FileNameExtensionFilter("*.png", "png"));
-					if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-						File pieChart = fileChooser.getSelectedFile();
-						try {
-							int width = 560;
-							int height = 370;
-							ChartUtilities.saveChartAsPNG(pieChart, chart, width, height);
-						} catch (IOException ex) {
-							JOptionPane.showMessageDialog(saveImage, ex);
-						}
-					} else {
-						JOptionPane.showMessageDialog(saveImage, "No file choosen!");
-
-					}
+                saveChartImage(chart, saveStatistic);
 				}
 
 			});
-
 			ChartFrame frame = new ChartFrame("Chart of vaccination statistic", chart);
 			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
 			frame.setVisible(true);
-
 			frame.setBounds(450, 100, 450, 450);
-
-			frame.add(saveImage);
-
+			frame.add(saveStatistic);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void saveChartImage(JFreeChart chart,JButton save) {
+		
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileFilter(new FileNameExtensionFilter("*.png", "png"));
+		if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+			File chartFile = fileChooser.getSelectedFile();
+			try {
+				int width = 560;
+				int height = 370;
+				ChartUtilities.saveChartAsPNG(chartFile, chart, width, height);
+			} catch (IOException ex) {
+				JOptionPane.showMessageDialog(save, ex);
+			}
+		} else {
+			JOptionPane.showMessageDialog(save, "No file choosen!");
+
+		}	
 	}
 
 }

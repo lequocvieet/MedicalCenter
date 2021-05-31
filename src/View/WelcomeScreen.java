@@ -90,7 +90,7 @@ public class WelcomeScreen  {
 	public WelcomeScreen() throws Exception {
 		patientDAO = new PatientDAO();
 		doctorDAO = new DoctorDAO();
-		/*whDAO = new WeightHeightDAO();*/
+		whDAO = new WeightHeightDAO();
 		eventDAO = new EventDAO();
 		clinicDAO = new ClinicDAO();
 		initialize();

@@ -22,7 +22,6 @@ public class ChatBotTab extends JFrame implements KeyListener {
 		super("VINY - HEALTHCARE CHATBOT");
 		setBounds(800, 200, 600, 400);
 		setResizable(false);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		dialog.setEditable(false); // isko nahi chedna
 		input.addKeyListener(this);
@@ -30,10 +29,9 @@ public class ChatBotTab extends JFrame implements KeyListener {
 		p.add(scroll);
 		p.add(input);
 		p.setBackground(new Color(128, 128, 128));
-
 		add(p);
-
 		setVisible(true);
+
 //for background
 		dialog.setBackground(getBackground());
 
