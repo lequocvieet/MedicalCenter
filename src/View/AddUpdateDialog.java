@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -48,6 +49,8 @@ public class AddUpdateDialog extends JDialog {
 	private JTextField addressField;
 	private JTextField emailField;
 	private JTextField doctorNameField = null;
+	private JLabel lblNewLabel_8;
+	private JLabel lblNewLabel_5;
 
 	/**
 	 * Launch the application.
@@ -75,9 +78,12 @@ public class AddUpdateDialog extends JDialog {
 		doctorDAO = theDoctorDAO;
 		doctorTab = theDoctorTab;
 		updateMode = theUpdateMode;
+		
 		setTitle("Add");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 		if (updateMode) {
 			setTitle("Update");
+			setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 			if (!doctorTab)
 				populateGui(thePrevPatient);
 			else
@@ -86,6 +92,10 @@ public class AddUpdateDialog extends JDialog {
 		if (doctorTab) {
 			genderField.setEditable(false);
 			doctorNameField.setEditable(false);
+			genderField.setSize(0, 0);
+			doctorNameField.setSize(0, 0);
+			lblNewLabel_5.setText(null);
+			lblNewLabel_8.setText(null);
 		}
 	}
 
@@ -151,7 +161,7 @@ public class AddUpdateDialog extends JDialog {
 		dateOfBirthField.setBounds(130, 180, 120, 30);
 		contentPanel.add(dateOfBirthField);
 
-		JLabel lblNewLabel_5 = new JLabel("Gender");
+		lblNewLabel_5 = new JLabel("Gender");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_5.setBounds(260, 180, 55, 30);
 		contentPanel.add(lblNewLabel_5);
@@ -206,7 +216,7 @@ public class AddUpdateDialog extends JDialog {
 		doctorNameField.setBounds(130, 330, 320, 30);
 		contentPanel.add(doctorNameField);
 
-		JLabel lblNewLabel_8 = new JLabel("Doctor Name");
+	    lblNewLabel_8 = new JLabel("Doctor Name");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_8.setBounds(40, 330, 80, 30);
 		contentPanel.add(lblNewLabel_8);

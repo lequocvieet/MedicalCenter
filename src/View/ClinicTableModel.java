@@ -17,7 +17,7 @@ public class ClinicTableModel extends AbstractTableModel {
 	private static final int EMAIL_COL = 4;
 	private static final int TYPE_COL = 5;
 
-	private String[] columnNames = { "No", "Clinicname", "Address", "Phone number", "Email", "Clinic Type" };
+	private String[] columnNames = { "ID", "Clinicname", "Address", "Phone number", "Email", "Clinic Type" };
 	List<Clinic> clinics;
 
 	public ClinicTableModel(List<Clinic> clinics) {

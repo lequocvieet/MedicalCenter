@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -62,6 +63,7 @@ public class AddIndexDialog extends JDialog {
 	}
 
 	public AddIndexDialog() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 		setTitle("Add New Index");
 		setBounds(100, 100, 500, 300);
 		getContentPane().setLayout(new BorderLayout());

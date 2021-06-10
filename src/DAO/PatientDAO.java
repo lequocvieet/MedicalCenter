@@ -88,13 +88,16 @@ public class PatientDAO {
             St = Con.prepareStatement("select * from patient where patientId like ?");
             St.setString(1, id);
             Rs = St.executeQuery();
-
-            while (Rs.next()) {
-                Patient tempPatient = convertRowToPatient(Rs);
+            while(Rs.next()) {
+                Patient tempPatient = convertRowToPatient(Rs);               
+                
                 thisperson = tempPatient;
-            }
-            return thisperson;
-        } finally {
+               
+                }
+         return thisperson;  
+        }
+            
+        finally {
             close(St, Rs);
         }
     }
@@ -151,8 +154,9 @@ public class PatientDAO {
     public void updatePatient(Patient temp) throws SQLException {
         PreparedStatement St = null;
         try {
-            String sql = "Update patient "
-                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , address= ?, phoneNumber=?, email=?,"
+            String sql = "update patient "
+                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , "
+            		+"address= ?, phoneNumber=?, email=?"
                     + " where patientId = ? ";
             St = Con.prepareStatement(sql);
 

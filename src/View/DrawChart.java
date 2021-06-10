@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -61,7 +63,8 @@ public class DrawChart {
 					PlotOrientation.VERTICAL, false, false, false);
 			CategoryPlot catplot = chart.getCategoryPlot();
 			catplot.setRangeGridlinePaint(Color.BLACK);
-			JButton saveHeight=new JButton("Save");
+			JButton saveHeight=new JButton();
+			saveHeight.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
 			saveHeight.addActionListener(new ActionListener() {
 				
 				@Override
@@ -72,6 +75,7 @@ public class DrawChart {
 
 			ChartFrame frame = new ChartFrame("Chart of Height", chart);
 			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/line-chart.png")));
 			frame.setVisible(true);
 			frame.setSize(450, 450);
 			frame.add(saveHeight);
@@ -92,7 +96,8 @@ public class DrawChart {
 					PlotOrientation.VERTICAL, false, false, false);
 			CategoryPlot catplot = chart.getCategoryPlot();
 			catplot.setRangeGridlinePaint(Color.BLACK);
-			JButton saveWeight =new JButton("Save");
+			JButton saveWeight =new JButton();
+			saveWeight.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
 			saveWeight.addActionListener(new ActionListener() {
 				
 				@Override
@@ -105,6 +110,7 @@ public class DrawChart {
 
 			ChartFrame frame = new ChartFrame("Chart of Weight", chart);
 			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/line-chart.png")));
 			frame.setVisible(true);
 			frame.setSize(450, 450);
 			frame.add(saveWeight);
@@ -132,6 +138,7 @@ public class DrawChart {
 					true, // include legend
 					true, false);
 			JButton saveStatistic = new JButton("Save");
+			saveStatistic.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
 			saveStatistic.addActionListener(new ActionListener() {
 
 				@Override
@@ -141,6 +148,7 @@ public class DrawChart {
 
 			});
 			ChartFrame frame = new ChartFrame("Chart of vaccination statistic", chart);
+			frame.setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/pie-chart.png")));
 			frame.setLayout(new FlowLayout(FlowLayout.LEFT));
 			frame.setVisible(true);
 			frame.setBounds(450, 100, 450, 450);

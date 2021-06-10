@@ -25,6 +25,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import DAO.WeightHeightDAO;
+import javax.swing.border.LineBorder;
+import java.awt.Toolkit;
 
 public class IndexTab extends JFrame {
 
@@ -62,14 +64,14 @@ public class IndexTab extends JFrame {
 	 * Create the frame.
 	 */
 	public IndexTab() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/exercise.png")));
 		setBounds(100, 100, 408, 538);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
-		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBorder(null);
 		panel.setBackground(SystemColor.inactiveCaption);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -81,6 +83,7 @@ public class IndexTab extends JFrame {
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 482, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 		JLabel labelImage = new JLabel("");
+		labelImage.setBorder(new LineBorder(SystemColor.info, 2));
 		JPanel panelImage = new JPanel();
 
 		JButton btnNewButton = new JButton("Add     "); // Add Index
