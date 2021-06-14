@@ -53,6 +53,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 import core.*;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class WelcomeScreen {
 
@@ -62,6 +64,7 @@ public class WelcomeScreen {
 	private DoctorDAO doctorDAO;
 	private EventDAO eventDAO;
 	private HistoryMedicalDAO histDAO;
+	private ValidateEmailPhone checkValid;
 
 	private WeightHeightDAO whDAO;
 	private ClinicDAO clinicDAO;
@@ -94,6 +97,7 @@ public class WelcomeScreen {
 		eventDAO = new EventDAO();
 		clinicDAO = new ClinicDAO();
 		histDAO=new HistoryMedicalDAO();
+		checkValid=new ValidateEmailPhone();
 		initialize();
 	}
 
@@ -119,9 +123,27 @@ public class WelcomeScreen {
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("Home", null, panel, null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/Image/MedicalCenterHome.png")));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 1131, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 569, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(11, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
 		tabbedPane.setBackgroundAt(0, SystemColor.inactiveCaption);
 		tabbedPane.setForegroundAt(0, Color.BLACK);
-
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(240, 240, 240));
 		tabbedPane.addTab("Patient", null, panel_1, null);
@@ -232,7 +254,7 @@ public class WelcomeScreen {
 		JButton btnNewButton = new JButton("Add   ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddUpdateDialog adddialog = new AddUpdateDialog(panel_1, patientDAO, null, null, null, false, false);
+				AddUpdateDialog adddialog = new AddUpdateDialog(panel_1, patientDAO, null, null, null, false, false,checkValid);
 				adddialog.setVisible(true);
 
 			}
@@ -255,7 +277,7 @@ public class WelcomeScreen {
 
 				Patient temp = (Patient) table_1.getValueAt(row, PatientTableModel.OBJECT_COL);
 
-				AddUpdateDialog updatedialog = new AddUpdateDialog(panel_1, patientDAO, temp, null, null, false, true);
+				AddUpdateDialog updatedialog = new AddUpdateDialog(panel_1, patientDAO, temp, null, null, false, true,checkValid);
 
 				updatedialog.setVisible(true);
 			}
@@ -366,7 +388,7 @@ public class WelcomeScreen {
 		JButton btnNewButton_7 = new JButton("Add   ");// add Doctor
 		btnNewButton_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddUpdateDialog adddialog = new AddUpdateDialog(panel_2, null, null, doctorDAO, null, true, false);
+				AddUpdateDialog adddialog = new AddUpdateDialog(panel_2, null, null, doctorDAO, null, true, false,checkValid);
 				adddialog.setVisible(true);
 			}
 		});
@@ -387,7 +409,7 @@ public class WelcomeScreen {
 
 				Doctor temp = (Doctor) table_2.getValueAt(row, DoctorTableModel.OBJECT_COL);
 
-				AddUpdateDialog updatedialog = new AddUpdateDialog(panel_2, null, null, doctorDAO, temp, true, true);
+				AddUpdateDialog updatedialog = new AddUpdateDialog(panel_2, null, null, doctorDAO, temp, true, true,checkValid);
 
 				updatedialog.setVisible(true);
 
@@ -411,9 +433,10 @@ public class WelcomeScreen {
 
 					Doctor temp = (Doctor) table_2.getValueAt(row, DoctorTableModel.OBJECT_COL);
 					doctorDAO.deleteDoctor(temp.getID());
-					/*
-					 * histDAO.deleteHist(temp.getID()); whDAO.deleteWH(temp.getID());
-					 */
+					
+				   histDAO.deleteHist(temp.getID());
+				   whDAO.deleteWH(temp.getID());
+					 
 
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -497,7 +520,7 @@ public class WelcomeScreen {
 			public void actionPerformed(ActionEvent e) { // Add Clinic
 				AddUpdateClinicDialog diag;
 				try {
-					diag = new AddUpdateClinicDialog(panel_3, null, clinicDAO, false);
+					diag = new AddUpdateClinicDialog(panel_3, null, clinicDAO, false,checkValid);
 					diag.setVisible(true);
 				} catch (Exception e1) {
 
@@ -525,7 +548,7 @@ public class WelcomeScreen {
 
 				AddUpdateClinicDialog updatedialog;
 				try {
-					updatedialog = new AddUpdateClinicDialog(panel_3, temp, clinicDAO, true);
+					updatedialog = new AddUpdateClinicDialog(panel_3, temp, clinicDAO, true,checkValid);
 					updatedialog.setVisible(true);
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -742,12 +765,16 @@ public class WelcomeScreen {
 		JToolBar toolBar_5 = new JToolBar();
 		toolBar_5.setBackground(SystemColor.activeCaption);
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
-		gl_panel_5.setHorizontalGroup(gl_panel_5.createParallelGroup(Alignment.LEADING).addComponent(toolBar_5,
-				GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE));
-		gl_panel_5.setVerticalGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
+		gl_panel_5.setHorizontalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
+				.addComponent(toolBar_5, GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
+		);
+		gl_panel_5.setVerticalGroup(
+			gl_panel_5.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_5.createSequentialGroup()
-						.addComponent(toolBar_5, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(557, Short.MAX_VALUE)));
+					.addComponent(toolBar_5, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(557, Short.MAX_VALUE))
+		);
 
 		JButton btnNewButton_19 = new JButton("OpenChatBot");// Open chatBot
 		btnNewButton_19.addActionListener(new ActionListener() {
@@ -766,12 +793,27 @@ public class WelcomeScreen {
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("AboutUs", null, panel_6, null);
-		GroupLayout groupLayout_1 = new GroupLayout(panel_6);
-		groupLayout_1.setHorizontalGroup(
-				groupLayout_1.createParallelGroup(Alignment.LEADING).addGap(0, 1150, Short.MAX_VALUE));
-		groupLayout_1
-				.setVerticalGroup(groupLayout_1.createParallelGroup(Alignment.LEADING).addGap(0, 590, Short.MAX_VALUE));
-		panel_6.setLayout(groupLayout_1);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
+		gl_panel_6.setHorizontalGroup(
+			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_6.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_4, GroupLayout.PREFERRED_SIZE, 1132, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panel_6.setVerticalGroup(
+			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_6.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane_4, GroupLayout.PREFERRED_SIZE, 565, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(15, Short.MAX_VALUE))
+		);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		scrollPane_4.setViewportView(lblNewLabel_1);
+		panel_6.setLayout(gl_panel_6);
 		tabbedPane.setForegroundAt(6, Color.BLACK);
 		MainScreen.getContentPane().setLayout(groupLayout);
 		MainScreen.setForeground(Color.GRAY);

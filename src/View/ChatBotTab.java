@@ -2,6 +2,7 @@ package View;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -38,7 +39,7 @@ public class ChatBotTab extends JFrame implements KeyListener {
 
 		p.add(scroll);
 		p.add(input);
-		p.setBackground(new Color(128, 128, 128));
+		p.setBackground(SystemColor.inactiveCaption);
 		add(p);
 		setVisible(true);
 

@@ -73,6 +73,7 @@ public class AppointmentTab extends JFrame {
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBackground(SystemColor.inactiveCaption);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(panel,
 				GroupLayout.PREFERRED_SIZE, 794, GroupLayout.PREFERRED_SIZE));
@@ -105,12 +106,12 @@ public class AppointmentTab extends JFrame {
 		sendEmailButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 
 		JLabel lblToday = new JLabel("");
-		lblToday.setBorder(new LineBorder(new Color(153, 180, 209), 2));
+		lblToday.setBorder(new LineBorder(SystemColor.info, 2));
 		lblToday.setFont(new Font("Tahoma", Font.BOLD, 14));
 
 		JLabel lblTomorrow = new JLabel("");
 		lblTomorrow.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTomorrow.setBorder(new LineBorder(SystemColor.activeCaption, 2));
+		lblTomorrow.setBorder(new LineBorder(SystemColor.info, 2));
 
 		JPanel panel_1 = new JPanel();
 

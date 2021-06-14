@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,7 @@ public class AddUpdateDialog extends JDialog {
 	private Patient prevPatient;
 	private boolean doctorTab;
 	private boolean updateMode;
+	private ValidateEmailPhone checkValid;
 	private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
 	private final JPanel contentPanel = new JPanel();
@@ -69,7 +71,7 @@ public class AddUpdateDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public AddUpdateDialog(JPanel thePanel, PatientDAO thePatientDAO, Patient thePrevPatient, DoctorDAO theDoctorDAO,
-			Doctor thePrevDoctor, boolean theDoctorTab, boolean theUpdateMode) {
+			Doctor thePrevDoctor, boolean theDoctorTab, boolean theUpdateMode, ValidateEmailPhone theCheckValid) {
 		this();
 		thisPanel = thePanel;
 		prevPatient = thePrevPatient;
@@ -78,12 +80,12 @@ public class AddUpdateDialog extends JDialog {
 		doctorDAO = theDoctorDAO;
 		doctorTab = theDoctorTab;
 		updateMode = theUpdateMode;
-		
+		checkValid = theCheckValid;
+
 		setTitle("Add");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 		if (updateMode) {
 			setTitle("Update");
-			setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 			if (!doctorTab)
 				populateGui(thePrevPatient);
 			else
@@ -109,7 +111,7 @@ public class AddUpdateDialog extends JDialog {
 		addressField.setText(thepreviousPerson.getAddress());
 		if (thepreviousPerson instanceof Patient) {
 			genderField.setText(((Patient) thepreviousPerson).getGender());
-			doctorNameField.setText(thepreviousPerson.getFirstName());
+		    doctorNameField.setText(((Patient) thepreviousPerson).getDoctorName());
 		}
 		idField.setEditable(false);
 	}
@@ -119,6 +121,7 @@ public class AddUpdateDialog extends JDialog {
 		setBounds(100, 100, 500, 500);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(SystemColor.inactiveCaption);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
@@ -207,7 +210,7 @@ public class AddUpdateDialog extends JDialog {
 		emailField = new JTextField();
 		emailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		emailField.setColumns(10);
-		emailField.setBounds(130, 280, 320, 30);
+		emailField.setBounds(130, 280, 320, 30); //phoneField.setBounds(325, 230, 125, 30);
 		contentPanel.add(emailField);
 
 		doctorNameField = new JTextField();
@@ -216,7 +219,7 @@ public class AddUpdateDialog extends JDialog {
 		doctorNameField.setBounds(130, 330, 320, 30);
 		contentPanel.add(doctorNameField);
 
-	    lblNewLabel_8 = new JLabel("Doctor Name");
+		lblNewLabel_8 = new JLabel("Doctor Name");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_8.setBounds(40, 330, 80, 30);
 		contentPanel.add(lblNewLabel_8);
@@ -245,8 +248,11 @@ public class AddUpdateDialog extends JDialog {
 			}
 		}
 	}
- //Save Doctor
+
+	// Save Doctor
+	@SuppressWarnings("static-access")
 	protected void saveDoctor() {
+
 		String id = idField.getText();
 		String last_name = lastNameField.getText();
 		String first_name = firstNameField.getText();
@@ -255,47 +261,58 @@ public class AddUpdateDialog extends JDialog {
 		String address = addressField.getText();
 		String phone = phoneField.getText();
 		Doctor temp = null;
-		if (id.length() == 0) {
-			JOptionPane.showMessageDialog(thisPanel, "Please enter ID!");
 
+		if (!(checkValid.validateEmail(thisPanel, email)) || !(checkValid.validatePhone(thisPanel, phone))) {
+			JOptionPane.showMessageDialog(thisPanel, "Your Email or Phone Number is Invalid!");
+			emailField.setText("");
+			phoneField.setText("");
 		} else {
-			try {
-				if (updateMode) {
-					temp = prevDoctor;
-					temp.setLastName(last_name);
-					temp.setFirstName(first_name);
-					temp.setDateOfBirth(formatter.parse(date_of_birth));
-					temp.setEmail(email);
-					temp.setPhoneNum(phone);
-					temp.setAddress(address);
-				} else {
-					temp = new Doctor(id, last_name, first_name, formatter.parse(date_of_birth), address, email, phone);
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			if (id.length() == 0) {
+				JOptionPane.showMessageDialog(thisPanel, "Please enter ID!");
 
-			try {
-				if (updateMode) {
-					doctorDAO.updateDoctor(temp);
-					JOptionPane.showMessageDialog(thisPanel, "Updated successfully", "Updated successfully ",
-							JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					doctorDAO.addDoctor(temp);
-					JOptionPane.showMessageDialog(thisPanel, "Added successfully", "Added successfully ",
-							JOptionPane.INFORMATION_MESSAGE);
+			} else {
+				try {
+					if (updateMode) {
+						temp = prevDoctor;
+						temp.setLastName(last_name);
+						temp.setFirstName(first_name);
+						temp.setDateOfBirth(formatter.parse(date_of_birth));
+						temp.setEmail(email);
+						temp.setPhoneNum(phone);
+						temp.setAddress(address);
+					} else {
+						temp = new Doctor(id, last_name, first_name, formatter.parse(date_of_birth), address, email,
+								phone);
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
 				}
 
-				setVisible(false);
-				dispose();
+				try {
+					if (updateMode) {
+						doctorDAO.updateDoctor(temp);
+						JOptionPane.showMessageDialog(thisPanel, "Updated successfully", "Updated successfully ",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						doctorDAO.addDoctor(temp);
+						JOptionPane.showMessageDialog(thisPanel, "Added successfully", "Added successfully ",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(thisPanel, "Error saving" + e.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
+					setVisible(false);
+					dispose();
+
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(thisPanel, "Error saving" + e.getMessage(), "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
+
 		}
+
 	}
- // Save Patient
+
+	// Save Patient
 	protected void savePatient() {
 		String id = idField.getText();
 		String last_name = lastNameField.getText();
@@ -307,48 +324,58 @@ public class AddUpdateDialog extends JDialog {
 		String doctor_name = doctorNameField.getText();
 		String gender = genderField.getText();
 		Patient temp = null;
-		if (id.length() == 0) {
-			JOptionPane.showMessageDialog(thisPanel, "Please enter ID");
+
+	if (!(checkValid.validateEmail(thisPanel, email)) || !(checkValid.validatePhone(thisPanel, phone))) {
+			JOptionPane.showMessageDialog(thisPanel, "Your Email or Phone Number is Invalid!");
+			emailField.setText("");
+			phoneField.setText("");
 		} else {
-			try {
-				if (updateMode) {
 
-					temp = prevPatient;
-					temp.setLastName(last_name);
-					temp.setFirstName(first_name);
-					temp.setDateOfBirth(formatter.parse(date_of_birth));
-					temp.setEmail(email);
-					temp.setPhoneNum(phone);
-					temp.setAddress(address);
-					temp.setGender(gender);
-					temp.setDoctorName(doctor_name);
-				} else {
-					temp = new Patient(id, last_name, first_name, formatter.parse(date_of_birth), address, email, phone,
-							gender, doctor_name);
+			if (id.length() == 0) {
+				JOptionPane.showMessageDialog(thisPanel, "Please enter ID");
+			} else {
+				try {
+					if (updateMode) {
 
+						temp = prevPatient;
+						temp.setLastName(last_name);
+						temp.setFirstName(first_name);
+						temp.setDateOfBirth(formatter.parse(date_of_birth));
+						temp.setEmail(email);
+						temp.setPhoneNum(phone);
+						temp.setAddress(address);
+						temp.setGender(gender);
+						temp.setDoctorName(doctor_name);
+					} else {
+						temp = new Patient(id, last_name, first_name, formatter.parse(date_of_birth), address, email,
+								phone, gender, doctor_name);
+
+					}
+
+				} catch (ParseException e) {
+					e.printStackTrace();
 				}
+				try {
+					if (updateMode) {
+						patientDAO.updatePatient(temp);
+						JOptionPane.showMessageDialog(thisPanel, "Updated successfully", "Updated successfully ",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						patientDAO.addPatient(temp);
+						JOptionPane.showMessageDialog(thisPanel, "Added successfully", "Added successfully ",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
 
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (updateMode) {
-					patientDAO.updatePatient(temp);
-					JOptionPane.showMessageDialog(thisPanel, "Updated successfully", "Updated successfully ",
-							JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					patientDAO.addPatient(temp);
-					JOptionPane.showMessageDialog(thisPanel, "Added successfully", "Added successfully ",
-							JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
+					dispose();
+
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(thisPanel, "Error saving: " + e.getMessage(), "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
-
-				setVisible(false);
-				dispose();
-
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(thisPanel, "Error saving: " + e.getMessage(), "Error",
-						JOptionPane.ERROR_MESSAGE);
 			}
+
 		}
+
 	}
 }

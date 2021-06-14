@@ -57,7 +57,7 @@ public class HistoryMedical {
 		this.nextAppointment = nextAppointment;
 	}
 	public HistoryMedical( Date dateOfInjection, String typeOfVaccine, int iDVaccine, String address,
-			String interaction, String imageHist, Date nextAppointment) {
+		String interaction, String imageHist, Date nextAppointment) {
 		this.dateOfInjection = dateOfInjection;
 		this.typeOfVaccine = typeOfVaccine;
 		IDVaccine = iDVaccine;

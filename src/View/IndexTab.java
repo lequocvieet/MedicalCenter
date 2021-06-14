@@ -64,6 +64,7 @@ public class IndexTab extends JFrame {
 	 * Create the frame.
 	 */
 	public IndexTab() {
+		setTitle("Index");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/exercise.png")));
 		setBounds(100, 100, 408, 538);
 		contentPane = new JPanel();

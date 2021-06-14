@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,6 +69,7 @@ public class AddIndexDialog extends JDialog {
 		setBounds(100, 100, 500, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(SystemColor.inactiveCaption);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
