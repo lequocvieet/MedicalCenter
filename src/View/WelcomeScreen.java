@@ -812,6 +812,7 @@ public class WelcomeScreen {
 		);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Technical\\AboutUSPage.png"));
 		scrollPane_4.setViewportView(lblNewLabel_1);
 		panel_6.setLayout(gl_panel_6);
 		tabbedPane.setForegroundAt(6, Color.BLACK);
