@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -51,14 +53,19 @@ public class AddEventDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @throws Exception 
 	 */
-	public AddEventDialog() {
+	public AddEventDialog() throws Exception {
+		
+		eventDAO=new EventDAO();
 		setType(Type.UTILITY);
 		setTitle("Create New Event");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 		setBounds(100, 100, 500, 320);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel_1 = new JLabel("Name");

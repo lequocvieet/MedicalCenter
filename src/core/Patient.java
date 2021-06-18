@@ -5,7 +5,7 @@ import java.util.Date;
 public class Patient extends Person {
 
     private String doctorName;
-    private String gender;//?? humm tai sao lai khong dua gender vao constructor luon tim hieu sau nha!
+    private String gender;
 
     public Patient() {
 
@@ -29,14 +29,14 @@ public class Patient extends Person {
 
     public Patient(String id, String lastName, String firstName, Date dateOfBirth, String address, String email, String phoneNum, String doctorName,
                    String gender, WeightHeight[] patientWH) { // constructor day du tham so
-        super(id, lastName, firstName, dateOfBirth, address, email, phoneNum, patientWH);
+        super(id, lastName, firstName, dateOfBirth, address, phoneNum, email, patientWH);
         this.gender = gender;
         this.doctorName = doctorName;
     }
 
     public Patient(String id, String lastName, String firstName, Date dateOfBirth, String address, String email, String phoneNum,
                    String gender, String doctorName) {  //constructor khuyet WH
-        super(id, lastName, firstName, dateOfBirth, address, email, phoneNum);
+        super(id, lastName, firstName, dateOfBirth, address, phoneNum, email);
         this.gender = gender;
         this.doctorName = doctorName;
 

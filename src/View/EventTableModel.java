@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 
 import core.Event;
 
-class EventTableTable extends AbstractTableModel {
+class EventTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
@@ -22,7 +22,7 @@ class EventTableTable extends AbstractTableModel {
 	private String[] columnNames = { "STT", "Name", "Date", "Description" };
 	private List<Event> Events;
 
-	public EventTableTable(List<Event> theEvents) {
+	public EventTableModel(List<Event> theEvents) {
 		Events = theEvents;
 	}
 

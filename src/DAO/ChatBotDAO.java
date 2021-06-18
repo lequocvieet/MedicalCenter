@@ -1,11 +1,49 @@
 package DAO;
 
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Properties;
+
 // dua Data nay xuong DAO va luu trong sql trong tuong lai
 
 public class ChatBotDAO {
+	 private Connection Con;
+	
+
+	    // connect SQL
+	 /*   public ChatBotDAO() throws Exception {
+	        Properties prop = new Properties();
+	        prop.load(new FileInputStream("database/person.properties"));
+	        String user = prop.getProperty("user");
+	        String password = prop.getProperty("password");
+	        String url = prop.getProperty("url");
+	        Con = DriverManager.getConnection(url, user, password);
+	    }
+
+	/*public void  insertData(String[][] data) throws SQLException {
+	    PreparedStatement stm = null;
+		Con.setAutoCommit(false);
+		stm = Con.prepareStatement("INSERT INTO YOURTABLE (NUMBER1,NUMBER2 ,NUMBER3, NUMBER4, NUMBER5) VALUES (?, ?, ?, ?, ?)");
+		for (int row = 0; row < 53; row ++){ // rows 
+			for(int column=0;column  )
+		        stm.setString(1, data[i][0]);  
+		        stm.setString(2, data[i][1]); 
+		        stm.setString(3, data[i][2]); 
+		        stm.setString(4, data[i][3]); 
+		        stm.setString(5, data[i][4]);      
+		        stm.addBatch();
+		}
+		stm.executeBatch();
+		Con.commit();
+	}*/
+	
 	public String[][] openChatBotData() {
 
-		// String[][] chatBot = null;
 		String[][] chatBot = {
 				// standard greetings
 				{ "HI", "HELLO", "HOLA", "OLA ", "hi", "hello", "hallo", "HALLO", "hola", "ola", "howdy", "hey" },

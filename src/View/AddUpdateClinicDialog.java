@@ -15,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,6 +33,7 @@ public class AddUpdateClinicDialog extends JDialog {
 	private ClinicDAO clinicDAO;
 	private Clinic prevClinic;
 	private boolean updateMode;
+	
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField idField;
@@ -38,6 +42,7 @@ public class AddUpdateClinicDialog extends JDialog {
 	private JTextField phoneField;
 	private JTextField emailField;
 	private JTextField typeField;
+	private ValidateEmailPhone theCheckValid;
 
 	/**
 	 * Launch the application.
@@ -56,13 +61,14 @@ public class AddUpdateClinicDialog extends JDialog {
 	 * Create the dialog.
 	 */
 
-	public AddUpdateClinicDialog(JPanel thePanel, Clinic thePrevClinic, ClinicDAO theClinicDAO, boolean theUpdateMode)
+	public AddUpdateClinicDialog(JPanel thePanel, Clinic thePrevClinic, ClinicDAO theClinicDAO, boolean theUpdateMode,ValidateEmailPhone checkValid)
 			throws Exception {
 		this();
 		thisPanel = thePanel;
 		prevClinic = thePrevClinic;
 		clinicDAO = theClinicDAO;
 		updateMode = theUpdateMode;
+		theCheckValid=checkValid;
 
 		if (updateMode) {
 			setTitle("Update");
@@ -78,12 +84,19 @@ public class AddUpdateClinicDialog extends JDialog {
 		phoneField.setText(thePrevClinic.getPhoneNum());
 		emailField.setText(thePrevClinic.getEmail());
 		typeField.setText(thePrevClinic.getType());
+		
 	}
 
 	public AddUpdateClinicDialog() {
 		setBounds(100, 100, 500, 450);
+		setTitle("Add");
+		if(updateMode) {
+			setTitle("Update");	
+		}
+		setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/add.png")));
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(SystemColor.inactiveCaption);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
@@ -95,7 +108,6 @@ public class AddUpdateClinicDialog extends JDialog {
 		{
 			idField = new JTextField();
 			idField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			idField.setEditable(false);
 			idField.setColumns(10);
 			idField.setBounds(130, 30, 320, 30);
 			contentPanel.add(idField);
@@ -193,6 +205,7 @@ public class AddUpdateClinicDialog extends JDialog {
 	}
 
 //Save Clinic 
+	@SuppressWarnings("static-access")
 	protected void saveClinic() {
 
 		String id = idField.getText();
@@ -203,34 +216,47 @@ public class AddUpdateClinicDialog extends JDialog {
 		String type = typeField.getText();
 
 		Clinic temp = null;
-		if (updateMode) {
-			temp = prevClinic;
-			temp.setClinicName(clinicName);
-			temp.setAddress(address);
-			temp.setPhoneNum(phoneNum);
-			temp.setEmail(email);
-			temp.setType(type);
-			temp.setID(id);
-		} else {
-			temp = new Clinic(id, clinicName, address, phoneNum, email, type);
+		
+		if(  !( theCheckValid.validateEmail(thisPanel, email)) || !( theCheckValid.validatePhone(thisPanel, phoneNum)) ) {
+			JOptionPane.showMessageDialog(thisPanel, "Your Email or Phone Number is Invalid!");
+            emailField.setText("");	
+            phoneField.setText("");
 		}
-		try {
-			if (updateMode) {
-				clinicDAO.updateClinic(temp);
-				JOptionPane.showMessageDialog(thisPanel, "Update successfully", "Update successfully",
-						JOptionPane.INFORMATION_MESSAGE);
-			} else {
-				clinicDAO.addClinic(temp);
-				JOptionPane.showMessageDialog(thisPanel, "Add successfully", "Add successfully",
-						JOptionPane.INFORMATION_MESSAGE);
-			}
+		else {
 
-			setVisible(false);
-			dispose();
+    		if (updateMode) {
+    			temp = prevClinic;
+    			temp.setClinicName(clinicName);
+    			temp.setAddress(address);
+    			temp.setPhoneNum(phoneNum);
+    			temp.setEmail(email);
+    			temp.setType(type);
+    			temp.setID(id);
+    		} else {
+    			temp = new Clinic(id, clinicName, address, phoneNum, email, type);
+    		}
+    		try {
+    			if (updateMode) {
+    				clinicDAO.updateClinic(temp);
+    				JOptionPane.showMessageDialog(thisPanel, "Update successfully", "Update successfully",
+    						JOptionPane.INFORMATION_MESSAGE);
+    			} else {
+    				clinicDAO.addClinic(temp);
+    				JOptionPane.showMessageDialog(thisPanel, "Add successfully", "Add successfully",
+    						JOptionPane.INFORMATION_MESSAGE);
+    			}
 
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(thisPanel, "Error saving: " + e.getMessage(), "Error",
-					JOptionPane.ERROR_MESSAGE);
+    			setVisible(false);
+    			dispose();
+
+    		} catch (Exception e) {
+    			JOptionPane.showMessageDialog(thisPanel, "Error saving: " + e.getMessage(), "Error",
+    					JOptionPane.ERROR_MESSAGE);
+    		}  
+			
 		}
+		
+		
+	
 	}
 }

@@ -2,10 +2,9 @@ package core;
 
 import java.util.Date;
 
-public class Person {  // thong nhat la class bed se khong gan voi benh nhan ma chi la mot thuoc tinh ben ngoai
-    // tam thoi the da neu can se sua lai trong peerson va database them Bed vao
+public class Person {  
 
-    protected String ID; // khoa chinh de tim theo Id
+    protected String ID; 
     protected String lastName;
     protected String firstName;
     protected Date dateOfBirth;

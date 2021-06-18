@@ -154,7 +154,6 @@ public class DoctorDAO {
 
             String stringDate = formatter.format(temp.getDateOfBirth());
 
-            St.setString(1, temp.getID());
             St.setString(1, temp.getLastName());
             St.setString(2, temp.getFirstName());
             St.setString(3, stringDate);

@@ -88,13 +88,16 @@ public class PatientDAO {
             St = Con.prepareStatement("select * from patient where patientId like ?");
             St.setString(1, id);
             Rs = St.executeQuery();
-
-            while (Rs.next()) {
-                Patient tempPatient = convertRowToPatient(Rs);
+            while(Rs.next()) {
+                Patient tempPatient = convertRowToPatient(Rs);               
+                
                 thisperson = tempPatient;
-            }
-            return thisperson;
-        } finally {
+               
+                }
+         return thisperson;  
+        }
+            
+        finally {
             close(St, Rs);
         }
     }
@@ -152,8 +155,9 @@ public class PatientDAO {
         PreparedStatement St = null;
         try {
             String sql = "update patient "
-                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , address= ?, phoneNum=?, email=?,"
-                    + " where patientID = ? ";
+                    + " set lastName = ?, firstName = ?, dateOfBirth=?, gender = ?, doctorName = ? , "
+            		+"address= ?, phoneNumber=?, email=?"
+                    + " where patientId = ? ";
             St = Con.prepareStatement(sql);
 
             String stringDate = formatter.format(temp.getDateOfBirth());
@@ -179,7 +183,7 @@ public class PatientDAO {
     public void deletePatient(String patientID) throws SQLException {
         PreparedStatement St = null;
         try {
-            String sql = "delete from patient where patientID = ?";
+            String sql = "delete from patient where patientId = ?";
             St = Con.prepareStatement(sql);
             St.setString(1, patientID);
             St.executeUpdate();
