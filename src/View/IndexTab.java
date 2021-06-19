@@ -143,10 +143,9 @@ public class IndexTab extends JFrame {
 				if (bmi_index == 0) {
 				} else if (bmi_index < 16) {
 
-					advices_text = "Servere Thinness" + " More exercises More nutrients!";
+					advices_text = "Servere Thinness" + " More exercises More nutrients!";     
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\More exercises Severe thinness.jpg"));
+						image = ImageIO.read( getClass().getResource("/Image/More exercises Severe thinness.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -157,8 +156,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Moderate Thinness" + " Excercises and eat healthy!";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\eat healthy.png"));
+						image = ImageIO.read( getClass().getResource("/Image/eat healthy.png"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -167,10 +165,9 @@ public class IndexTab extends JFrame {
 
 				} else if (bmi_index < 18.5) {
 
-					advices_text = "Mild Thinness" + " More Exercises";
+					advices_text = "Mild Thinness" + " More Exercises";  
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\Ride a bike.jpg"));
+						image =  ImageIO.read( getClass().getResource("/Image/Ride a bike.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -181,8 +178,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Normal" + " OK perfect Body, keep going!";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\keepgoing.jpg"));
+						image = ImageIO.read( getClass().getResource("/Image/keepgoing.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -193,8 +189,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Overweight" + " More exercises ,diet Food";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\diet food.jpg"));
+						image =ImageIO.read( getClass().getResource("/Image/ diet food.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -205,8 +200,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Obese class I" + " Exercises every day !";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\workout.jpeg"));
+						image = ImageIO.read( getClass().getResource("/Image/ workout.jpeg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -217,8 +211,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Obese class II" + " Stop eating workout harder";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\stop eat.jpg"));
+						image = ImageIO.read( getClass().getResource("/Image/Stop eat2.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 
@@ -229,8 +222,7 @@ public class IndexTab extends JFrame {
 
 					advices_text = "Obese class III" + " Emergency Workout Now!";
 					try {
-						image = ImageIO.read(new File(
-								"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\Stop eat2.jpg"));
+						image =ImageIO.read( getClass().getResource("/Image/stop eat.jpg"));
 						labelImage.setIcon(resizeImage(image, panelImage.getWidth(), panelImage.getHeight()));
 					} catch (IOException e1) {
 

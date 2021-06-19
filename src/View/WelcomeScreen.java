@@ -811,7 +811,8 @@ public class WelcomeScreen {
 					.addContainerGap(15, Short.MAX_VALUE))
 		);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel("New label");//AboutUSPage.png
+		lblNewLabel_1.setIcon(new ImageIcon(getClass().getResource("/Image/AboutUSPage.png")));
 		scrollPane_4.setViewportView(lblNewLabel_1);
 		panel_6.setLayout(gl_panel_6);
 		tabbedPane.setForegroundAt(6, Color.BLACK);
@@ -822,8 +823,7 @@ public class WelcomeScreen {
 		MainScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainScreen.setTitle("MedicalCenter\r\n");
 		MainScreen.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-		MainScreen.setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\healthcare.png"));
+		MainScreen.	setIconImage(Toolkit.getDefaultToolkit().getImage(IndexTab.class.getResource("/Image/healthcare.png")));
 
 		MainScreen.setBounds(100, 100, 1200, 700);
 
