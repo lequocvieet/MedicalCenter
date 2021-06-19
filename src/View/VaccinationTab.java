@@ -158,8 +158,7 @@ public class VaccinationTab extends JFrame {
 					}
 
 				} else {
-					ImageIcon iconNull = new ImageIcon(
-							"C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\noImage.png");
+					ImageIcon iconNull = new ImageIcon(getClass().getResource("/Image/noImage.png"));
 					lblImage.setIcon(iconNull);
 				}
 

@@ -64,7 +64,7 @@ public class DrawChart {
 			CategoryPlot catplot = chart.getCategoryPlot();
 			catplot.setRangeGridlinePaint(Color.BLACK);
 			JButton saveHeight=new JButton();
-			saveHeight.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
+			saveHeight.setIcon(new ImageIcon(getClass().getResource("/Image/download.png")));
 			saveHeight.addActionListener(new ActionListener() {
 				
 				@Override
@@ -97,7 +97,7 @@ public class DrawChart {
 			CategoryPlot catplot = chart.getCategoryPlot();
 			catplot.setRangeGridlinePaint(Color.BLACK);
 			JButton saveWeight =new JButton();
-			saveWeight.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
+			saveWeight.setIcon(new ImageIcon(getClass().getResource("/Image/download.png")));
 			saveWeight.addActionListener(new ActionListener() {
 				
 				@Override
@@ -138,7 +138,7 @@ public class DrawChart {
 					true, // include legend
 					true, false);
 			JButton saveStatistic = new JButton("Save");
-			saveStatistic.setIcon(new ImageIcon("C:\\Users\\Admin\\Desktop\\Project I\\MedicalCenter\\src\\Image\\download.png"));
+			saveStatistic.setIcon(new ImageIcon(getClass().getResource("/Image/download.png")));
 			saveStatistic.addActionListener(new ActionListener() {
 
 				@Override
