@@ -105,6 +105,7 @@ public class WelcomeScreen {
 
 		MainScreen = new JFrame();
 		MainScreen.getContentPane().setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		MainScreen.setLocationRelativeTo(null);
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0), 3), null));
