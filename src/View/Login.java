@@ -81,7 +81,7 @@ public class Login {
 		lblNewLabel_5.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 30));
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(55, 169, 116, 55);
+		lblNewLabel_5.setBounds(55, 169, 155, 55);
 		panel.add(lblNewLabel_5);
 
 		JLabel lblNewLabel_5_1 = new JLabel("Center");

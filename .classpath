@@ -6,19 +6,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-=======
-	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/mysql-connector-java-8.0.13.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jcommon-1.0.19/jcommon-1.0.19.jar">
+	<classpathentry kind="lib" path="mysql-connector-java-8.0.13.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Admin/Desktop/jcommon-1.0.19/jcommon-1.0.19.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -33,10 +31,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
->>>>>>> 0e22386b87dbd199990475c3f110fa6b796fc4dc
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Desktop/Connect_java/mysql-connector-java-8.0.13.jar"/>
-	<classpathentry kind="lib" path="D:/javax.mail.jar"/>
+	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
