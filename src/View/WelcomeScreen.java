@@ -77,7 +77,7 @@ public class WelcomeScreen {
 	private JTable table_3;
 	private JTable table_4;
 
-	public static void main(String[] args) { // run chuong trinh o day
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -126,7 +126,7 @@ public class WelcomeScreen {
 		tabbedPane.addTab("Home", null, panel, null);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/Image/MedicalCenterHome.png")));
+		lblNewLabel.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/Image/MedicalHomeVer2.png")));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
