@@ -31,12 +31,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Desktop/jfreechart-1.0.19.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ADMIN/Desktop/jcommon.jar">
+	<classpathentry kind="lib" path="D:/Download/Libraries Java/jfreechart/jfreechart-1.0.19.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
